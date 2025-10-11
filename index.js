@@ -1,0 +1,29 @@
+const express = require('express');
+const app=express();
+const port=process.env.PORT || 4000;
+const morgan=require('morgan');
+const path=require('path');
+const dbconnect=require('./config/db');
+const dotenv=require('dotenv');
+const userRoute=require('./routes/user.route');
+const adminRoute=require('./routes/admin.route');
+const productRoute=require('./routes/product.route');
+const cookieParser=require('cookie-parser');
+app.use(cookieParser());
+app.set('view engine','ejs');
+app.set(express.static(path.join(__dirname,'/public')));
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(morgan('dev'));
+dotenv.config();
+dbconnect()
+app.use('/user',userRoute);
+app.use('/admin',adminRoute);
+app.use('/product',productRoute);
+
+
+
+
+app.listen(port,()=>{
+    console.log(`Server is running on port ${port}`);
+});
