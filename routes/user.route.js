@@ -26,6 +26,7 @@ router.post("/register", async (req, res) => {
   });
   console.log(createuser);
   res.send("User registered successfully");
+
 });
 
 module.exports = router;

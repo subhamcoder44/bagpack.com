@@ -16,14 +16,10 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(morgan('dev'));
 dotenv.config();
-dbconnect()
+dbconnect();
 app.use('/user',userRoute);
 app.use('/admin',adminRoute);
 app.use('/product',productRoute);
-
-
-
-
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 });
